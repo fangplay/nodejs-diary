@@ -19,44 +19,48 @@ app.get("/", (req, res) => {
 });
 
 app.get('/diary-list', (req, res) => {
-  const diaries = db.get('diary').value();
-  return res.send(diaries).status(200);
+  // const diaries = db.get('diary').value();
+  // return res.send(diaries).status(200);
+  res.sendFile(path.join(__dirname, "public", "./views/diary-list.html"));
 })
 
 app.get('/os-list', (req, res) => {
-  const os = db.get('os').value();
-  return res.json(os).status(200);
+  // const os = db.get('os').value();
+  // return res.json(os).status(200);
+  res.sendFile(path.join(__dirname, "public", "./views/os-list.html"));
 })
 
-app.post('/diary-add', (req, res) =>{
-  const data = {
-    id:nanoid.nanoid(),
-    title:req.body.title,
-    description:req.body.description,
-    date:req.body.date
-  }
-  db.get('diary')
-  .push(data)
-  .last()
-  .write()
-  return res.status(200).send(
-    db.get('diary').last().value()
-  );
+app.get('/diary-add', (req, res) =>{
+  // const data = {
+  //   id:nanoid.nanoid(),
+  //   title:req.body.title,
+  //   description:req.body.description,
+  //   date:req.body.date
+  // }
+  // db.get('diary')
+  // .push(data)
+  // .last()
+  // .write()
+  // return res.status(200).send(
+  //   db.get('diary').last().value()
+  // );
+  res.sendFile(path.join(__dirname, "public", "./views/add-diaries.html"));
 })
 
-app.post('/os-add', (req, res) =>{
-  const data = {
-    id:nanoid.nanoid(),
-    title:req.body.title,
-    type:req.body.type
-  }
-  db.get('os')
-  .push(data)
-  .last()
-  .write()
-  return res.status(200).send(
-    db.get('os').last().value()
-  );
+app.get('/os-add', (req, res) =>{
+  // const data = {
+  //   id:nanoid.nanoid(),
+  //   title:req.body.title,
+  //   type:req.body.type
+  // }
+  // db.get('os')
+  // .push(data)
+  // .last()
+  // .write()
+  // return res.status(200).send(
+  //   db.get('os').last().value()
+  // );
+  res.sendFile(path.join(__dirname, "public", "./views/add-os.html"));
 })
 
 app.listen(port, () => {
