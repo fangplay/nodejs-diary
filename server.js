@@ -4,15 +4,18 @@ const path = require('path');
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const express = require("express");
-const app = express();
+const bodyParser= require('body-parser');
+var app = express();;
+app.use(bodyParser.urlencoded({ extended: true }));
 const port = process.env.PORT || 3000;
 
 const adapter = new FileSync(path.join(__dirname, './db.json'));
 const db = low(adapter);
 
 app.get("/", (req, res) => {
-  res.send("Hello! Node.js");
-  return res.status(200);
+  // res.send("Index Page System");
+  // return res.status(200);
+  res.sendFile(path.join(__dirname, "public", "./views/index.html"));
 });
 
 app.get('/diary-list', (req, res) => {
@@ -57,5 +60,5 @@ app.post('/os-add', (req, res) =>{
 })
 
 app.listen(port, () => {
-  console.log("Starting server on http://localhost:" + port);
+  console.log("Server started on http://localhost:" + port);
 });
