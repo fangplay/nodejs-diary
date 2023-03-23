@@ -1,4 +1,32 @@
 {
-    "diary":[],
-    "os":[]
+  "diary": [
+    {
+      "id": "K9wbAMBZxmTg-VdnPtv3w",
+      "title": "Go to Bangkok",
+      "description": "Hi today i have go to Bangkok for find work and making Youtube channel",
+      "date": "2022-05-21"
+    }
+  ],
+  "os": [
+    {
+      "id": "L4Dq7qnTEMmbIaQ7W8nH2",
+      "osname": "CentOS",
+      "type": "Linux"
+    },
+    {
+      "id": "fouJrhFK3Ap5vizkyPQDT",
+      "osname": "Kali",
+      "type": "Linux"
+    },
+    {
+      "id": "cs0rmf1txqFrv7KuRvqoT",
+      "osname": "Windows Server",
+      "type": "Windows"
+    },
+    {
+      "id": "YRO25B-6Z-pCAh3zMK5Jz",
+      "osname": "Ubuntu",
+      "type": "Linux"
+    }
+  ]
 }
