@@ -4,6 +4,8 @@ const path = require('path');
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const express = require("express");
+const ejs = require('ejs');
+var expressLayouts = require('express-ejs-layouts');
 const bodyParser= require('body-parser');
 var app = express();;
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,25 +14,35 @@ const port = process.env.PORT || 3000;
 const adapter = new FileSync(path.join(__dirname, './db.json'));
 const db = low(adapter);
 
+// set view engine
+app.set('view engine', 'html');
+app.set('view engine', 'ejs');
+app.use(expressLayouts);
+
 app.get("/", (req, res) => {
+  // res.render('index')
   res.sendFile(path.join(__dirname, "public", "./views/index.html"));
 });
 
 app.get('/diary-list', (req, res) => {
-  const diary = db.get('diary').value();
+  // const diary = db.get('diary').value();
+  // res.render('diary-list',{ diary: diary })
   res.sendFile(path.join(__dirname, "public", "./views/diary-list.html"));
 })
 
 app.get('/os-list', (req, res) => {
-  const os = db.get('os').value();
+  // const os = db.get('os').value();
+  // res.render('os-list',{ os: os })
   res.sendFile(path.join(__dirname, "public", "./views/os-list.html"));
 })
 
 app.get('/diary-add', (req, res) => {
+  // res.render('add-diaries')
   res.sendFile(path.join(__dirname, "public", "./views/add-diaries.html"));
 })
 
 app.get('/os-add', (req, res) => {
+  // res.render('add-os')
   res.sendFile(path.join(__dirname, "public", "./views/add-os.html"));
 })
 
