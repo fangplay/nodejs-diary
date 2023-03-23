@@ -17,10 +17,12 @@ app.get("/", (req, res) => {
 });
 
 app.get('/diary-list', (req, res) => {
+  const diary = db.get('diary').value();
   res.sendFile(path.join(__dirname, "public", "./views/diary-list.html"));
 })
 
 app.get('/os-list', (req, res) => {
+  const os = db.get('os').value();
   res.sendFile(path.join(__dirname, "public", "./views/os-list.html"));
 })
 
