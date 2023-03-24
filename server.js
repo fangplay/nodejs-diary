@@ -5,7 +5,6 @@ const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const express = require("express");
 const ejs = require('ejs');
-var expressLayouts = require('express-ejs-layouts');
 const bodyParser= require('body-parser');
 var app = express();;
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,7 +16,7 @@ const db = low(adapter);
 // set view engine
 app.set('view engine', 'html');
 app.set('view engine', 'ejs');
-app.use(expressLayouts);
+app.set('views', path.join(__dirname, './public/views'));
 
 app.get("/", (req, res) => {
   // res.render('index')
@@ -25,15 +24,17 @@ app.get("/", (req, res) => {
 });
 
 app.get('/diary-list', (req, res) => {
-  // const diary = db.get('diary').value();
-  // res.render('diary-list',{ diary: diary })
-  res.sendFile(path.join(__dirname, "public", "./views/diary-list.html"));
+  const diary = db.get('diary').value();
+  res.render('diary-list',{ diary: diary })
+  // res.sendFile(path.join(__dirname, "public", "./views/diary-list.html"));
+  // res.render('diary-list');
 })
 
 app.get('/os-list', (req, res) => {
-  // const os = db.get('os').value();
-  // res.render('os-list',{ os: os })
-  res.sendFile(path.join(__dirname, "public", "./views/os-list.html"));
+  const os = db.get('os').value();
+  res.render('os-list',{ os: os })
+  // res.sendFile(path.join(__dirname, "public", "./views/os-list.html"));
+  // res.render('os-list');
 })
 
 app.get('/diary-add', (req, res) => {
