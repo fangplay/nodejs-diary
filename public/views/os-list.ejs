@@ -30,7 +30,25 @@
         </div>
     </header>
 <body>
-    
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>OS Name</th>
+                    <th>OS Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% os.forEach(function(os){ %>
+                <tr>
+                    <th><%= os.osname %></th>
+                    <th><%= os.type %></th>
+                </tr>
+                <% }) %>
+            </tbody>
+          
+        </table>
+    </div>
 </body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="bootstrap" viewBox="0 0 118 94">

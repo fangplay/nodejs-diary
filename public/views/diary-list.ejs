@@ -30,7 +30,29 @@
     </div>
 </header>
 <body>
-    
+    <div class="container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Title</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% diary.forEach(function(diary){ %>
+            <tr>
+              <th><%= diary.date %></th>
+              <th><%= diary.title %></th>
+              <th><a href="#">Edit</a></th>
+              <th><a href="#">Delete</a></th>
+            </tr>
+            <% }) %>
+          </tbody>
+          
+        </table>
+    </div>
 </body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="bootstrap" viewBox="0 0 118 94">
