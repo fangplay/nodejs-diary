@@ -19,7 +19,7 @@
     "fix-esm": "^1.0.1",
     "lowdb": "^1.0.0",
     "method-override": "^3.0.0",
-    "nanoid": "^4.0.1",
+    "nanoid": "^5.0.2",
     "nodemon": "^2.0.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
