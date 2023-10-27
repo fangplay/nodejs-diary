@@ -6,7 +6,7 @@ const FileSync = require('lowdb/adapters/FileSync');
 const express = require("express");
 const ejs = require('ejs');
 const bodyParser= require('body-parser');
-var app = express.Router();
+var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 const port = process.env.PORT || 3000;
 
@@ -21,6 +21,7 @@ const db = low(adapter);
 // set view engine
 app.set('view engine', 'html');
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + './public'));
 app.set('views', path.join(__dirname, './public/views'));
 
 app.get("/", (req, res) => {
