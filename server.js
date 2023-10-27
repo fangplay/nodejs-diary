@@ -6,7 +6,7 @@ const FileSync = require('lowdb/adapters/FileSync');
 const express = require("express");
 const ejs = require('ejs');
 const bodyParser= require('body-parser');
-var app = express.Router();;
+var app = express.Router();
 app.use(bodyParser.urlencoded({ extended: true }));
 const port = process.env.PORT || 3000;
 
@@ -52,46 +52,75 @@ app.get('/os-add', (req, res) => {
   res.sendFile(path.join(__dirname, "public", "./views/add-os.html"));
 })
 
-app.get('/diary-edit?${diary.id}', (req,res,next) => {
-  let diaryID = req.param.id;
-  Diary.findById(diaryID)
-    .then(diary => {
-      res.render('diary-edit',{
-        diary: diary
-      });
-    })
-    .catch(error => {
+app.get('/diary-edit', (req,res,next) => {
+  // let diaryID = req.param.id;
+  db.read();
+  let did = req.query.id;
+  let dataup = db.get('diary').find({ id: did}).value();
+  res.render('diary-edit',{ dataup });
+  // Diary.findById(diaryID)
+  //   .then(diary => {
+  //     res.render('diary-edit',{
+  //       diary: diary
+  //     });
+  //   })
+  //   .catch(error => {
+  //     alert('Error updating diary by ID: ${error.message}');
+  //     next(error);
+  //   });
+})
+
+app.post('/diary-update', (req,res,next) => {
+  // let diaryID = req.param.id,
+  // diaryParams = {
+  //   title : req.body.title,
+  //   description : req.body.description,
+  //   date : req.body.date
+  // };
+
+  // Diary.findByIdAndUpdate(diaryID, {
+  //   $set: diaryParams
+  // }).then(
+  //   diary => {
+  //     alert('Updated diary data complete');
+  //     rea.locals.redirect = '/diary-list';
+  //     res.locals.diary = diary;
+  //     next();
+  //   }
+  // ).catch(error => {
+  //   alert('Error updating diary by ID: ${error.message}');
+  //   next(error);
+  // });
+  db.read();
+  let did = req.body.id;
+
+  db.get('diary')
+  .find({id: did})
+  .assign({title: req.body.title})
+  .assign({description: req.body.description})
+  .assign({date: req.body.date})
+  .write()
+  .then(
+      diary => {
+        alert('Updated diary data complete');
+        rea.locals.redirect = '/diary-list';
+        next();
+      }
+  )
+  .catch(error => {
       alert('Error updating diary by ID: ${error.message}');
       next(error);
-    });
+  })
 })
 
-app.put('/diary-update?${diary.id}', (req,res,next) => {
-  let diaryID = req.param.id,
-  diaryParams = {
-    title : req.body.title,
-    description : req.body.description,
-    date : req.body.date
-  };
-
-  Diary.findByIdAndUpdate(diaryID, {
-    $set: diaryParams
-  }).then(
-    diary => {
-      alert('Updated diary data complete');
-      rea.locals.redirect = '/diary-list';
-      res.locals.diary = diary;
-      next();
-    }
-  ).catch(error => {
-    alert('Error updating diary by ID: ${error.message}');
-    next(error);
-  });
-})
-
-app.delete('/diary-delete?${diary.id}', (req,res,next) => {
-  let diaryID = req.param.id;
-  Diary.findByIdAndRemove(diaryID)
+app.delete('/diary-delete', (req,res,next) => {
+  // let diaryID = req.param.id;
+  // Diary.findByIdAndRemove(diaryID)
+  db.read();
+  let did = req.query.id;
+  db.get('diary')
+  .remove({ id: did})
+  .write()
   .then(() => {
     alert('Deleted diary data complete');
     res.locals.redirect = "/diary-list";
