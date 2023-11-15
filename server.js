@@ -25,11 +25,11 @@ const db = low(adapter);
 // app.set('views', path.join(__dirname, './public/views'));
 
 // Require static assets from public folder
-app.use(express.static(path.join(__dirname, './public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Set 'views' directory for any views 
 // being rendered res.render()
-app.set('views', path.join(__dirname, './views'));
+app.set('views', path.join(__dirname, 'views'));
 
 // Set view engine as EJS
 app.engine('html', require('ejs').renderFile);
@@ -169,12 +169,12 @@ app.post('/os-save',(req,res) => {
 })
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function(req, res) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
