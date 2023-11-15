@@ -24,20 +24,23 @@ const db = low(adapter);
 // app.use(express.static(__dirname + './public'));
 // app.set('views', path.join(__dirname, './public/views'));
 
-// Require static assets from public folder
-app.use(express.static(path.join(__dirname, 'public')));
+// Set up the public directory for static assets
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // Set 'views' directory for any views 
 // being rendered res.render()
 app.set('views', path.join(__dirname, 'views'));
 
 // Set view engine as EJS
-app.engine('html', require('ejs').renderFile);
+// app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+
+// Set the view engine (if using a templating engine like EJS)
+app.set('view engine', 'ejs');
 
 app.get("/", (req, res) => {
   // res.render('index')
-  res.sendFile(path.join(__dirname, "public", "./views/index.html"));
+  res.sendFile(path.join(__dirname, "./views/index.html"));
 });
 
 app.get('/diary-list', (req, res) => {
@@ -45,26 +48,26 @@ app.get('/diary-list', (req, res) => {
   res.render('diary-list',{ diary: diary })
   // res.sendFile(path.join(__dirname, "public", "./views/diary-list.html"));
   // res.render('diary-list');
-})
+});
 
 app.get('/os-list', (req, res) => {
   const os = db.get('os').value();
   res.render('os-list',{ os: os })
   // res.sendFile(path.join(__dirname, "public", "./views/os-list.html"));
   // res.render('os-list');
-})
+});
 
 app.get('/diary-add', (req, res) => {
   // res.render('add-diaries')
-  res.sendFile(path.join(__dirname, "public", "./views/add-diaries.html"));
-})
+  res.sendFile(path.join(__dirname, "./views/add-diaries.html"));
+});
 
 app.get('/os-add', (req, res) => {
   // res.render('add-os')
-  res.sendFile(path.join(__dirname, "public", "./views/add-os.html"));
-})
+  res.sendFile(path.join(__dirname, "./views/add-os.html"));
+});
 
-app.get('/diary-edit', (req,res,next) => {
+app.get('/diary-edit', (req,res) => {
   // let diaryID = req.param.id;
   db.read();
   let did = req.query.id;
@@ -80,7 +83,7 @@ app.get('/diary-edit', (req,res,next) => {
   //     alert('Error updating diary by ID: ${error.message}');
   //     next(error);
   //   });
-})
+});
 
 app.post('/diary-update', (req,res,next) => {
   // let diaryID = req.param.id,
@@ -122,8 +125,8 @@ app.post('/diary-update', (req,res,next) => {
   .catch(error => {
       alert('Error updating diary by ID: ${error.message}');
       next(error);
-  })
-})
+  });
+});
 
 app.delete('/diary-delete', (req,res,next) => {
   // let diaryID = req.param.id;
@@ -141,7 +144,7 @@ app.delete('/diary-delete', (req,res,next) => {
       alert('Error deleting diary by ID: ${error.message}');
       next(error);
   });
-})
+});
 
 
 app.post('/diary-save',(req,res) => {
@@ -155,7 +158,7 @@ app.post('/diary-save',(req,res) => {
   db.get('diary').push(diary).last().write();
   alert('Added diary data complete');
   res.redirect('/diary-add');
-})
+});
 
 app.post('/os-save',(req,res) => {
   db.read();
@@ -166,7 +169,7 @@ app.post('/os-save',(req,res) => {
   }
   db.get('os').push(os).last().write();
   res.redirect('/os-add');
-})
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res) {
@@ -187,4 +190,4 @@ app.use(function(err, req, res) {
 
 app.listen(port, () => {
   console.log("Server started on http://localhost:" + port);
-})
+});
