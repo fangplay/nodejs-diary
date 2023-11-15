@@ -117,13 +117,13 @@ app.post('/diary-update', (req,res,next) => {
   .write()
   .then(
       diary => {
-        alert('Updated diary data complete');
+        console.log('Updated diary data complete');
         rea.locals.redirect = '/diary-list';
         next();
       }
   )
   .catch(error => {
-      alert('Error updating diary by ID: ${error.message}');
+      console.log('Error updating diary by ID: ${error.message}');
       next(error);
   });
 });
@@ -137,11 +137,11 @@ app.delete('/diary-delete', (req,res,next) => {
   .remove({ id: did})
   .write()
   .then(() => {
-    alert('Deleted diary data complete');
+    console.log('Deleted diary data complete');
     res.locals.redirect = "/diary-list";
     next();
   }).catch(error => {
-      alert('Error deleting diary by ID: ${error.message}');
+      console.log('Error deleting diary by ID: ${error.message}');
       next(error);
   });
 });
@@ -156,7 +156,7 @@ app.post('/diary-save',(req,res) => {
     date : req.body.date
   }
   db.get('diary').push(diary).last().write();
-  alert('Added diary data complete');
+  console.log('Added diary data complete');
   res.redirect('/diary-add');
 });
 
