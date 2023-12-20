@@ -32,7 +32,7 @@
 <body>
     <div class="container">
     <h3>Diaries Editing</h3>
-    <form action="<%= /diary-update?${diary.id}?_method=PUT %>" method="post">
+    <form action="<%= /diary-update/:diary.id_method=PUT %>" method="post">
       <label>Date : </label><input type="date" value="<%= diary.date %>" name="date" id="date"><br>
       <label>Title : </label><input type="text" value="<%= diary.title %>" name="title" id="title"><br>
       <label>Description : </label>

@@ -67,10 +67,10 @@ app.get('/os-add', (req, res) => {
   res.sendFile(path.join(__dirname, "./views/add-os.html"));
 });
 
-app.get('/diary-edit', (req,res) => {
+app.get('/diary-edit/:diary.id', (req,res) => {
   // let diaryID = req.param.id;
   db.read();
-  let did = req.query.id;
+  let did = req.query.diary.id;
   let dataup = db.get('diary').find({ id: did}).value();
   res.render('diary-edit',{ dataup });
   // Diary.findById(diaryID)
@@ -85,7 +85,7 @@ app.get('/diary-edit', (req,res) => {
   //   });
 });
 
-app.post('/diary-update', (req,res,next) => {
+app.post('/diary-update/:diary.id', (req,res,next) => {
   // let diaryID = req.param.id,
   // diaryParams = {
   //   title : req.body.title,
@@ -107,7 +107,7 @@ app.post('/diary-update', (req,res,next) => {
   //   next(error);
   // });
   db.read();
-  let did = req.body.id;
+  let did = req.body.diary.id;
 
   db.get('diary')
   .find({id: did})
@@ -128,11 +128,11 @@ app.post('/diary-update', (req,res,next) => {
   });
 });
 
-app.delete('/diary-delete', (req,res,next) => {
+app.delete('/diary-delete/:diary.id', (req,res,next) => {
   // let diaryID = req.param.id;
   // Diary.findByIdAndRemove(diaryID)
   db.read();
-  let did = req.query.id;
+  let did = req.query.diary.id;
   db.get('diary')
   .remove({ id: did})
   .write()
