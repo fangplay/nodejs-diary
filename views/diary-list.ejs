@@ -72,10 +72,10 @@
           <tr>
             <th><%= diary.date %></th>
             <th><%= diary.title %></th>
-            <th><a href="<%= '/diary-edit/:id' %>">Edit</a></th>
+            <th><a href="/diary-edit/<%= diary.id %>">Edit</a></th>
             <th>
               <a
-                href="<%= '/diary-delete/:id' %>"
+                href="/diary-delete/<%= diary.id %>"
                 onclick="return confirm('Are you sure delete this diary data?')"
                 >Delete</a
               >
