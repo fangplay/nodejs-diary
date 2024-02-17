@@ -33,7 +33,7 @@
           href="/"
           class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
         >
-          NeoNext
+          SPECTRUMNext
         </a>
 
         <ul
@@ -72,10 +72,10 @@
           <tr>
             <th><%= diary.date %></th>
             <th><%= diary.title %></th>
-            <th><a href="<%= '/diary-edit/:diary.id' %>">Edit</a></th>
+            <th><a href="<%= '/diary-edit/:id' %>">Edit</a></th>
             <th>
               <a
-                href="<%= '/diary-delete/:diary.id' %>"
+                href="<%= '/diary-delete/:id' %>"
                 onclick="return confirm('Are you sure delete this diary data?')"
                 >Delete</a
               >
@@ -228,7 +228,7 @@
               .getElementById("copyright")
               .appendChild(document.createTextNode(new Date().getFullYear()));
           </script>
-          NeoNext Inc
+          SPECTRUMNext Inc
         </span>
       </div>
     </footer>

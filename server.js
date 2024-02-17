@@ -67,12 +67,17 @@ app.get('/os-add', (req, res) => {
   res.sendFile(path.join(__dirname, "./views/add-os.html"));
 });
 
-app.get('/diary-edit/:diary.id', (req,res) => {
+app.get('/diary-edit/:id', (req,res) => {
   // let diaryID = req.param.id;
-  db.read();
-  let did = req.query.diary.id;
+  // db.read();
+  let did = req.params.id;
   let dataup = db.get('diary').find({ id: did}).value();
-  res.render('diary-edit',{ dataup });
+  if(dataup){
+    res.render('diary-edit',{ dataup })
+  }else{
+    res.sendFile(path.join(__dirname, "./views/code/404.html"));
+  }
+  ;
   // Diary.findById(diaryID)
   //   .then(diary => {
   //     res.render('diary-edit',{
@@ -85,7 +90,7 @@ app.get('/diary-edit/:diary.id', (req,res) => {
   //   });
 });
 
-app.post('/diary-update/:diary.id', (req,res,next) => {
+app.post('/diary-update/:id', (req,res,next) => {
   // let diaryID = req.param.id,
   // diaryParams = {
   //   title : req.body.title,
@@ -106,8 +111,8 @@ app.post('/diary-update/:diary.id', (req,res,next) => {
   //   alert('Error updating diary by ID: ${error.message}');
   //   next(error);
   // });
-  db.read();
-  let did = req.body.diary.id;
+  // db.read();
+  const did = req.params.id;
 
   db.get('diary')
   .find({id: did})
@@ -128,10 +133,10 @@ app.post('/diary-update/:diary.id', (req,res,next) => {
   });
 });
 
-app.delete('/diary-delete/:diary.id', (req,res,next) => {
+app.delete('/diary-delete/:id', (req,res,next) => {
   // let diaryID = req.param.id;
   // Diary.findByIdAndRemove(diaryID)
-  db.read();
+  // db.read();
   let did = req.query.diary.id;
   db.get('diary')
   .remove({ id: did})
@@ -148,7 +153,7 @@ app.delete('/diary-delete/:diary.id', (req,res,next) => {
 
 
 app.post('/diary-save',(req,res) => {
-  db.read();
+  // db.read();
   var diary = {
     id : nanoid.nanoid(),
     title : req.body.title,
