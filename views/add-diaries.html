@@ -22,9 +22,9 @@
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
-                <li><a href="/os-list" class="nav-link px-2 text-white">OS List</a></li>
+                <!-- <li><a href="/os-list" class="nav-link px-2 text-white">OS List</a></li> -->
                 <li><a href="/diary-list" class="nav-link px-2 text-white">Diary Stories</a></li>
-                <li><a href="/os-add" class="nav-link px-2 text-white">Add OS</a></li>
+                <!-- <li><a href="/os-add" class="nav-link px-2 text-white">Add OS</a></li> -->
                 <li><a href="/diary-add" class="nav-link px-2 text-secondary">Add Diary</a></li>
             </ul>
         </div>
@@ -35,12 +35,12 @@
   <div class="container">
     <h3>Diaries Writing</h3>
     <form action="/diary-save" method="post">
-      <label>Date : </label><input type="date" name="date" id="date"><br>
       <label>Title : </label><input type="text" name="title" id="title"><br>
       <label>Description : </label>
       <!-- <input type="textarea" name="description" id="description"> -->
       <textarea id="description" name="description" rows="5" cols="100"></textarea>
       <br>
+      <label>Date : </label><input type="date" name="date" id="date"><br>
       <input type="submit" value="Save">
     </form>
   </div>

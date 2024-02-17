@@ -10,9 +10,13 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 const port = process.env.PORT || 3000;
 
+// Middleware
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+
+//database connect file db
 const adapter = new FileSync(path.join(__dirname, './db.json'));
 const db = low(adapter);
-
 // const methodOverride = require("method-override");
 // router.use(methodOverride("_method", {
 //   methods: ["POST", "GET"]
@@ -63,9 +67,9 @@ app.get('/os-add', (req, res) => {
 
 app.get('/diary-edit/:id', (req,res) => {
   let did = req.params.id;
-  let dataup = db.get('diary').find({ id: did}).value();
-  if(dataup){
-    res.render('diary-edit',{ dataup });
+  let diary = db.get('diary').find({ id: did}).value();
+  if(diary){
+    res.render('diary-edit',{ diary });
   }else{
     res.sendFile(path.join(__dirname, "./views/code/404.html"));
   }
