@@ -43,8 +43,8 @@ app.set('view engine', 'html');
 app.set('view engine', 'ejs');
 
 app.get("/", (req, res) => {
-  // res.render('index')
-  res.sendFile(path.join(__dirname, "./views/index.html"));
+  res.render('index');
+  // res.sendFile(path.join(__dirname, "./views/index.html"));
 });
 
 app.get('/diary-list', (req, res) => {
@@ -52,18 +52,19 @@ app.get('/diary-list', (req, res) => {
   res.render('diary-list',{ diary: diary })
 });
 
-app.get('/os-list', (req, res) => {
-  const os = db.get('os').value();
-  res.render('os-list',{ os: os })
-});
+// app.get('/os-list', (req, res) => {
+//   const os = db.get('os').value();
+//   res.render('os-list',{ os: os })
+// });
 
 app.get('/diary-add', (req, res) => {
-  res.sendFile(path.join(__dirname, "./views/add-diaries.html"));
+  res.render('add-diaries');
+  // res.sendFile(path.join(__dirname, "./views/add-diaries.html"));
 });
 
-app.get('/os-add', (req, res) => {
-  res.sendFile(path.join(__dirname, "./views/add-os.html"));
-});
+// app.get('/os-add', (req, res) => {
+//   res.sendFile(path.join(__dirname, "./views/add-os.html"));
+// });
 
 app.get('/diary-edit/:id', (req,res) => {
   let did = req.params.id;
@@ -71,7 +72,8 @@ app.get('/diary-edit/:id', (req,res) => {
   if(diary){
     res.render('diary-edit',{ diary });
   }else{
-    res.sendFile(path.join(__dirname, "./views/code/404.html"));
+    // res.sendFile(path.join(__dirname, "./views/code/404.html"));
+    res.render('/code/404');
   }
 });
 
